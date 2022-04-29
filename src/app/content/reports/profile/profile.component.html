@@ -1,0 +1,140 @@
+
+<div class="container-box">
+    <div class="header">
+    Profile
+    </div>
+    <div class="content">
+
+        <div class="row">
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <div class="form-group">
+                            <label class="lbl" for="txtName">Name</label>
+                            <input aria-describedby="nameHelp" class="form-control text-capitalize "
+                             id="txtName" name="txtName" disabled placeholder="Enter Name" tabindex="1" type="text" value="{{Name}}">
+                            <input id="hidId" value="36" type="hidden">
+                            <small id="nameHelp" class="form-text text-muted d-none">Name is mandatory</small>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-12 form-group">
+                                <label class="lbl" for="txtMobile">Mobile Number</label>
+                                <input aria-describedby="mobileHelp" disabled class="form-control" id="txtMobile" name="txtMobile" placeholder="Enter Mobile Number" tabindex="3" type="text" value="{{Mobile}}">
+                                <small id="mobileHelp" class="form-text text-muted d-none">Mobile Number is mandatory</small>
+                            </div>
+                            <div class="col-md-6 col-12 form-group">
+                                <label class="lbl" for="txtAlternateMobile">Alternate Mobile Number</label>
+                                <input aria-describedby="AlternateMobileHelp" disabled class="form-control text-uppercase" id="txtAlternateMobile" name="txtAlternateMobile" placeholder="Enter AlternateMobileNo" tabindex="2" type="text" value="{{AlternateMobile}}">
+                                <small id="AlternateMobileHelp" class="form-text text-muted d-none"></small>
+                            </div>
+                        </div>
+                     
+                        <div class="row">
+                            <div class="col-md-6 col-12 form-group">
+                                <label class="lbl" for="txtPAN">PAN</label>
+                                <input aria-describedby="panHelp" disabled class="form-control text-uppercase" id="txtPAN" name="txtPAN" placeholder="Enter PAN" tabindex="11" type="text" value="{{PAN}}">
+                                <small id="panHelp" class="form-text text-muted d-none"></small>
+                            </div>
+                            <div class="col-md-6 col-12 form-group">
+                                <label class="lbl" for="txtPinCode">PinCode</label>
+                                <input aria-describedby="pinHelp" disabled class="form-control" id="txtPinCode" name="txtPinCode" placeholder="Enter PinCode" tabindex="9" type="text" value="{{Pincode}}">
+                                <small id="pinHelp" class="form-text text-muted d-none"></small>
+                            </div>
+                            
+                        </div>
+                       
+                        
+                       
+                        
+        
+                    </div>
+                    <div class="col-md-6 col-12 ">
+                       
+                        <div class="form-group">
+                            <label class="lbl" for="txtEmail">Email ID</label>
+                            <input aria-describedby="emailHelp" disabled class="form-control text-lowercase" id="txtEmail" name="txtEmail" placeholder="Enter Email ID" tabindex="4" type="text" value="{{EmailID}}">
+                            <small id="emailHelp" class="form-text text-muted d-none">Name is mandatory</small>
+                        </div>
+                        <div class="form-group">
+        
+                            <label class="lbl" for="txtDOB">Date Of Birth</label>
+                            <input aria-describedby="dtFromDate" class="form-control" id="txtDOB" tabindex="5" type="text" readonly="readonly" value="{{DOB}}">
+        
+                            <small id="dobHelp" class="form-text text-muted d-none"></small>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-12 form-group">
+                              <label class="lbl" for="txtCity">City</label>
+                              <label class="form-control" disabled id="txtCity" aria_describedby="cityHelp">{{City}}</label>
+                              <small id="cityHelp" class="form-text text-muted d-none"></small>
+                          </div>
+                          <div class="col-md-6 col-12 form-group">
+                              <label class="lbl" for="txtState">State</label>
+                              <label class="form-control" id="txtState"  aria-describedby="StateHelp">{{State}}</label>
+                              <input id="hddStateID" value="34"  type="hidden">
+                              <small id="StateHelp" class="form-text text-muted d-none"></small>
+                          </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-12">
+                        <label class="lbl" for="txtAddress">Address</label>
+                        <textarea aria-describedby="addressHelp" disabled class="form-control" id="txtAddress" name="txtAddress" placeholder="Enter Address" tabindex="5" type="text" value="{{Address}}"></textarea>
+                        <small id="addressHelp" class="form-text text-muted d-none"></small>
+                    </div>
+                          
+                  </div>
+
+            </div>
+            <div class="col-md-2 col-12 text-center">
+                <img class="rounded-circle mt-4" src="../../assets/img/defualt.png">
+
+                <!-- <span class="btn btn-danger btn-lg">KYC NOT APPLIED</span> -->
+                <div class="span2">
+                    <p class="mb-1"><button class="btn btn-danger btn-block">KYC NOT APPLIED</button></p>
+                    
+                    <p class="mb-1" *ngIf="statuscode==1 && membertarget !=undefined" ><button class="btn btn-info btn-block" (click)="onClickGetTarget(TargetPopup)">Total {{Target}}</button></p>
+                    <p class="mb-1" *ngIf="statuscode==1 && membertarget !=undefined"><button class="btn btn-success btn-block" (click)="onClickGetTarget(TargetPopup)">Acheive {{Acheive}}</button></p>
+                    <p class="mb-1" *ngIf="statuscode==1 && membertarget !=undefined"><button class="btn btn-primary btn-block" (click)="onClickGetTarget(TargetPopup)">Remaining {{ Pening}}</button></p>
+                
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #TargetPopup>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Target List</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="ServiceModalView?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+        </div>
+        <div class="modal-body">
+          <h5 class="text-success" *ngIf="statuscode==1">{{msg}}</h5>
+          <h5 class="text-danger" *ngIf="statuscode==-1">{{msg}}</h5>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>MembershipType</th>
+                <th>Service Name</th>
+                <th>Target</th>
+                <th>Achieved</th>
+                <th>Remaining</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="membertarget !=undefined">
+              <tr *ngFor="let t of membertarget;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{t.membershipType}}</td>
+                <td>{{t.serviceName}}</td>
+                <td>{{t.target}}</td>
+                <td>{{t.achieved}}</td>
+                <td>{{t.pending}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-template>

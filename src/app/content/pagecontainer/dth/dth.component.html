@@ -1,0 +1,193 @@
+<div class="cus-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-outter-sec">
+          <div class="container">
+            <h3>DTH Recharge</h3>
+
+            <form [formGroup]="RechargeForm">
+
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <div class="cus-form-check-inline">
+
+
+                    <!--<select2 [data]="OperatorData" class="form-control" [value]="operator" (valueChanged)="Operatorchanged($event)" dropdownPosition="bottom" [cssImport]=true [options]="OperatorOptions"></select2>-->
+                    <mat-form-field class="example-full-width">
+                      <!--<label for="operator" class="text-danger">Operator</label>-->
+                      <input type="text" aria-label="Number" placeholder="Select Operator" matInput formControlName="myControl" [matAutocomplete]="auto">
+                      <a (click)="inputclear()" class="Browse-plan">  <i class="fa fa-times"></i> </a> <!--[formControl]="myControl"--><!--[formControl]="myControl"-->
+                      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="Operatorchangednew($event)" [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of filteredOperator | async" [value]="option">
+
+                          <!--<img [src]="transform('{{option.additional.image}}')"/> {{option.text}}-->
+                          <img [src]="transform(option.additional.image)" /> {{option.text}}
+                        </mat-option>
+
+
+
+                      </mat-autocomplete>
+                    </mat-form-field>
+
+                    <span class="errorMsg" *ngIf="operator==0 && IsRechargeSubmitted">Select Operator</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-check-inline cus-form-check-inline">
+                    <!-- <label>Mobile Number</label> -->
+                    <input type="phone" [(ngModel)]="mobile" formControlName="mobile" [ngClass]="{'is-invalid':(r.mobile.errors && IsRechargeSubmitted)||(!mobile && r.mobile.touched)}" class="form-control cus-form-control" placeholder="{{MobileplaceHolder}}" (keyup)="GetDTHPlans()">
+                    <a (click)="dthSimplePlanInfo()" class="Customer-Detail input-group-append cus-user-list">
+
+                      User Detail
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div *ngIf="(r.mobile.errors && IsRechargeSubmitted)||!mobile">
+                    <span class="accountRemark">{{AccountRemark}}</span>
+                    <span class="errorMsg">{{spnMobile}}</span>
+
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-check-inline cus-form-check-inline">
+                    <input type="text" class="form-control cus-form-control " placeholder="Amount" [(ngModel)]="amount" formControlName="amount" [ngClass]="{'is-invalid':(r.amount.errors && IsRechargeSubmitted)||(!amount && r.amount.touched)}">
+                    <!--<a (click)="dthInfo()" class="Browse-plan">  Browse Plans <br>of all operators</a>-->
+                    <a (click)="dthInfo()" class="Customer-Detail input-group-append cus-user-list cus-user-menu">Browse Plan</a>
+
+                    <!--<a (click)="dthInfo()" class="Browse-plan">  Browse Plans <br>of all operators</a>
+                    <a (click)="dthSimplePlanInfo()" class="Customer-Detail">  Customer<br>Detail</a>-->
+
+
+                  </div>
+
+
+                </div>
+
+                <div class="col-md-12">
+                  <div *ngIf="(r.amount.errors && IsRechargeSubmitted)||!amount">
+                    <span class="errorMsg">{{spnAmount}}</span>
+
+
+                  </div>
+
+                </div>
+
+                <div class="col-md-12 mt-2">
+                  <aditya-pageloader *ngIf="CustInfoLoader"></aditya-pageloader>
+                </div>
+                <div class="col-md-12 mt-2" *ngIf="CustInfoLoaded">
+                  <table class="table tblCustInfo">
+                    <tbody>
+                      <tr><td class="tblheader">Customer Name</td>:<td>{{CustInfo.customerName}}</td></tr>
+                      <tr><td class="tblheader">Monthly Recharge</td>:<td>&#x20B9; {{CustInfo.monthlyRecharge}}</td></tr>
+                      <tr><td class="tblheader">Balance</td>:<td>&#x20B9;{{CustInfo.balance}}</td></tr>
+                      <tr *ngIf="IsCustMore"><td class="tblheader">Registered Mobile No.</td>:<td>{{CustInfo.rmn}}</td></tr>
+                      <tr *ngIf="IsCustMore"><td class="tblheader">Plan Name</td>:<td>{{CustInfo.planname}}</td></tr>
+                      <tr *ngIf="IsCustMore"><td class="tblheader">Last Recharge Amount</td>:<td>&#x20B9;{{CustInfo.lastrechargeamount}}</td></tr>
+                      <tr *ngIf="IsCustMore"><td class="tblheader">Last Recharge Date</td>:<td>{{CustInfo.lastrechargedate}}</td></tr>
+                      <tr *ngIf="IsCustMore"><td class="tblheader">Next Recharge Date</td>:<td>{{CustInfo.nextRechargeDate}}</td></tr>
+                      <tr><td class="tblheader"></td><td><input type="button" class="btnMore" value="More.." (click)="GetMoreCustDetails()"></td></tr>
+                    </tbody>
+
+                  </table>
+                  <!--<table class="table tblCustInfo" id="CustMore" *ngIf="IsCustMore">
+                    <tbody>
+                      <tr><td class="tblheader">Registered Mobile No.</td>:<td>{{CustInfo.rmn}}</td></tr>
+                      <tr><td class="tblheader">Plan Name</td>:<td>{{CustInfo.planname}}</td></tr>
+                      <tr><td class="tblheader">Last Recharge Amount</td>:<td>&#x20B9;{{CustInfo.lastrechargeamount}}</td></tr>
+                      <tr><td class="tblheader">Last Recharge Date</td>:<td>{{CustInfo.lastrechargedate}}</td></tr>
+                      <tr><td class="tblheader">Next Recharge Date</td>:<td>{{CustInfo.nextRechargeDate}}</td></tr>
+                      <tr><td class="tblheader"></td><td><input type="button" class="btnMore" value="More.." (click)="GetMoreCustDetails()"></td></tr>
+                    </tbody>
+                  </table>-->
+                </div>
+
+                <div class="col-md-12 mt-2">
+                  <button type="submit" class="btn btn-primary cus-recharge-btn" (click)="proceedToAction()">Proceed to Recharge</button>
+
+                </div>
+
+
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-8">
+        <aditya-pageloader *ngIf="DTHInfoLoader"></aditya-pageloader>
+        <div class="form-outter-sec" *ngIf="IsbannerShow">
+          <div class="slider">
+            <ngx-slick-carousel class="carousel"
+                                #slickModal="slick-carousel"
+                                [config]="slideConfig">
+              <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+                <img src="{{ slide.resourceUrl }}" alt="" width="100%">
+              </div>
+            </ngx-slick-carousel>
+            <div></div>
+          </div>
+
+        </div>
+
+        <div *ngIf="!IsbannerShow" class="form-outter-sec tab-section form-outter-sec-info">
+          <h2>Recharge Offer</h2>
+
+          <tabset>
+            <table class="table table-hover tabs table-striped">
+              <thead>
+                <tr>
+                  <td>Plan</td>
+
+                  <td>Description</td>
+                  <td style="width: 90px;">Validity:Rs</td>
+                </tr>
+              </thead>
+
+            </table>
+            <ng-container *ngFor="let t of simplePlan">
+              <tab heading="{{t.name}}" *ngIf="t.data" class="tabs" style="color:#000;">
+
+                <table class="table table-hover table-borderless table-striped">
+
+                  <tbody>
+                    <tr *ngFor="let d of t.data">
+                      <td>{{d.plan_name}}</td>
+                      <td>{{d.desc}}</td>
+                      <td>
+                        <div *ngIf="d.rs['1 MONTHS']!=null" class="button" (click)="onamountClick(d.rs['1 MONTHS'])"> 1 MONTHS  &#x20B9;{{d.rs["1 MONTHS"]}}</div>
+                        <div *ngIf="d.rs['1 YEAR']!=null" class="button" (click)="onamountClick(d.rs['1 YEAR'])">1 YEAR &#x20B9; {{d.rs["1 YEAR"]}}</div>
+                        <div *ngIf="d.rs['3 MONTHS']!=null" class="button" (click)="onamountClick(d.rs['3 MONTHS'])"> 3 MONTHS &#x20B9; {{d.rs["3 MONTHS"]}}</div>
+                        <div *ngIf="d.rs['5 YEAR']!=null" class="button" (click)="onamountClick(d.rs['5 YEAR'])"> 5 YEAR &#x20B9; {{d.rs["5 YEAR"]}}</div>
+                        <div *ngIf="d.rs['6 MONTHS']!=null" class="button" (click)="onamountClick(d.rs['6 MONTHS'])">6 MONTHS &#x20B9; {{d.rs["6 MONTHS"]}}</div>
+                        <div *ngIf="d.rs['9 MONTHS']!=null" class="button" (click)="onamountClick(d.rs['9 MONTHS'])"> 9 MONTHS &#x20B9; {{d.rs["9 MONTHS"]}}</div>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+
+              </tab>
+            </ng-container>
+          </tabset>
+
+
+
+
+
+          <div>
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
