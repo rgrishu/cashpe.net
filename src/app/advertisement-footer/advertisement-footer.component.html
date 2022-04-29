@@ -1,33 +1,37 @@
-<div *ngIf="IsTrue"  class="container-box">
-  <div class="row">
-    <div class="col-md-12 mb-3">
-
-      <div class="content">
-
-        <div>
-
-
-          <ngx-slick-carousel class="carousel"
-                              #slickModal="slick-carousel"
-                              [config]="slideConfig"
-                              (init)="slickInit($event)"
-                              (breakpoint)="breakpoint($event)"
-                              (afterChange)="afterChange($event)"
-                              (beforeChange)="beforeChange($event)">
-            <div ngxSlickItem *ngFor="let slide of AdvertisementList" class="slide slide-item">
-              <a href="{{slide.returnUrl}}" target="_blank" class="d-flex">
-                <img src="{{Domain}}/Image/Advertisement/{{slide.contentImage}}.png" alt="">
-              </a>
-              <h4 class="mt-2"> {{slide.contentText}}</h4>
-            </div>
-          </ngx-slick-carousel>
-
-
+<div class="container">
+  <div *ngIf="IsTrue"  class="container-box">
+    <div class="row">
+      <div class="col-md-12 mb-3">
+  
+        <div class="content">
+  
+          <div>
+  
+  
+            <ngx-slick-carousel class="carousel"
+                                #slickModal="slick-carousel"
+                                [config]="slideConfig"
+                                (init)="slickInit($event)"
+                                (breakpoint)="breakpoint($event)"
+                                (afterChange)="afterChange($event)"
+                                (beforeChange)="beforeChange($event)">
+              <div ngxSlickItem *ngFor="let slide of AdvertisementList" class="slide slide-item">
+                <a href="{{slide.returnUrl}}" target="_blank" class="d-flex">
+                  <img src="{{Domain}}/Image/Advertisement/{{slide.contentImage}}.png" alt="">
+                </a>
+                <h4 class="mt-2"> {{slide.contentText}}</h4>
+              </div>
+            </ngx-slick-carousel>
+  
+  
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
 
 
 

@@ -1,5 +1,5 @@
 <div class="cus-container">
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <div class="col-md-4">
         <div class="form-outter-sec">
@@ -8,42 +8,51 @@
 
             <form [formGroup]="RechargeForm">
 
-              <div class="form-group row">
+              <div class="row">
                 <div class="col-md-12">
-                  <div class="cus-form-check-inline">
+                  <div class="form-group ">
+                    <div class="cus-form-check-inline">
 
+                      <!--<select2 [data]="OperatorData" class="form-control" [value]="operator" (valueChanged)="Operatorchanged($event)" dropdownPosition="bottom" [cssImport]=true [options]="OperatorOptions"></select2>-->
+                      <label >Operator</label>
+                      <mat-form-field class="example-full-width">
+                        
+                        <input type="text" aria-label="Number" placeholder="" matInput formControlName="myControl" [matAutocomplete]="auto">
+                        <a (click)="inputclear()" class="Browse-plan pr-0">  <i class="fa fa-times"></i> </a> <!--[formControl]="myControl"--><!--[formControl]="myControl"-->
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="Operatorchangednew($event)" [displayWith]="displayFn">
+                          <mat-option *ngFor="let option of filteredOperator | async" [value]="option">
+  
+                            <!--<img [src]="transform('{{option.additional.image}}')"/> {{option.text}}-->
+                            <img [src]="transform(option.additional.image)" /> {{option.text}}
+                          </mat-option>
+  
+  
+  
+                        </mat-autocomplete>
+                      </mat-form-field>
+  
+                      <span class="errorMsg" *ngIf="operator==0 && IsRechargeSubmitted">Select Operator</span>
+                    </div>
 
-                    <!--<select2 [data]="OperatorData" class="form-control" [value]="operator" (valueChanged)="Operatorchanged($event)" dropdownPosition="bottom" [cssImport]=true [options]="OperatorOptions"></select2>-->
-                    <mat-form-field class="example-full-width">
-                      <!--<label for="operator" class="text-danger">Operator</label>-->
-                      <input type="text" aria-label="Number" placeholder="Select Operator" matInput formControlName="myControl" [matAutocomplete]="auto">
-                      <a (click)="inputclear()" class="Browse-plan">  <i class="fa fa-times"></i> </a> <!--[formControl]="myControl"--><!--[formControl]="myControl"-->
-                      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="Operatorchangednew($event)" [displayWith]="displayFn">
-                        <mat-option *ngFor="let option of filteredOperator | async" [value]="option">
-
-                          <!--<img [src]="transform('{{option.additional.image}}')"/> {{option.text}}-->
-                          <img [src]="transform(option.additional.image)" /> {{option.text}}
-                        </mat-option>
-
-
-
-                      </mat-autocomplete>
-                    </mat-form-field>
-
-                    <span class="errorMsg" *ngIf="operator==0 && IsRechargeSubmitted">Select Operator</span>
                   </div>
+                  
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-check-inline cus-form-check-inline">
-                    <!-- <label>Mobile Number</label> -->
-                    <input type="phone" [(ngModel)]="mobile" formControlName="mobile" [ngClass]="{'is-invalid':(r.mobile.errors && IsRechargeSubmitted)||(!mobile && r.mobile.touched)}" class="form-control cus-form-control" placeholder="{{MobileplaceHolder}}" (keyup)="GetDTHPlans()">
-                    <a (click)="dthSimplePlanInfo()" class="Customer-Detail input-group-append cus-user-list">
 
-                      User Detail
-                    </a>
+                  <div class="form-group">
+                    <div class="form-check-inline cus-form-check-inline">
+                      <!-- <label>Mobile Number</label> -->
+                      <input type="phone" [(ngModel)]="mobile" formControlName="mobile" [ngClass]="{'is-invalid':(r.mobile.errors && IsRechargeSubmitted)||(!mobile && r.mobile.touched)}" class="form-control cus-form-control" placeholder="{{MobileplaceHolder}}" (keyup)="GetDTHPlans()">
+                      <a (click)="dthSimplePlanInfo()" class="Customer-Detail input-group-append cus-user-list">
+  
+                        User Detail
+                      </a>
+                    </div>
+
                   </div>
+                  
                 </div>
 
                 <div class="col-md-12">

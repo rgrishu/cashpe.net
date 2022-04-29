@@ -1,5 +1,5 @@
 <div class="cus-container">
-      <div class="container-fluid">
+      <div class="container">
           <div class="row">
              <div class="col-md-4">
                 <div class="form-outter-sec">
@@ -8,26 +8,6 @@
                       <form [formGroup]="RechargeForm">
 
                         <div class="form-group row">
-                          <div class="col-md-12">
-                            <div class="form-group cus-form-check-inline">
-                              <label class="pl-3">Operator</label>
-                              <!--<select2 [data]="OperatorData" class="form-control d-none" [value]="operator" (valueChanged)="Operatorchanged($event)" dropdownPosition="bottom" [cssImport]=true [options]="OperatorOptions"></select2>-->
-
-                              <mat-form-field class="example-full-width">
-                                <input type="text" placeholder="" matInput formControlName="myControl" [matAutocomplete]="auto">
-                                <a (click)="inputclear(0)" class="Browse-plan">  <i class="fa fa-times"></i> </a><!--[formControl]="myControl"-->
-                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="Operatorchangednew($event)" [displayWith]="displayFn">
-                                  <mat-option *ngFor="let option of filteredOperator | async" [value]="option">
-                                    <!--<img [src]="transform('{{option.additional.image}}')"/> {{option.text}}-->
-                                    <img [src]="transform(option.additional.image)" /> {{option.text}}
-                                  </mat-option>
-                                </mat-autocomplete>
-                              </mat-form-field>
-                              <span class="errorMsg" *ngIf="(operator==0 && IsRechargeSubmitted)">Select Operator</span>
-                            </div>
-                          </div>
-                          <!--Auto complete-->
-
 
                           <div class="col-md-12">
                             <div class="form-group cus-form-check-inline">
@@ -41,14 +21,36 @@
                               </div>
                             </div>
                           </div>
+                          <div class="col-md-12">
+                            <div class="form-group cus-form-check-inline">
+                              <label class="">Operator</label>
+                              <!--<select2 [data]="OperatorData" class="form-control d-none" [value]="operator" (valueChanged)="Operatorchanged($event)" dropdownPosition="bottom" [cssImport]=true [options]="OperatorOptions"></select2>-->
+
+                              <mat-form-field class="example-full-width">
+                                <input type="text" placeholder="" matInput formControlName="myControl" [matAutocomplete]="auto">
+                                <a (click)="inputclear(0)" class="Browse-plan pr-0">  <i class="fa fa-times"></i> </a><!--[formControl]="myControl"-->
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="Operatorchangednew($event)" [displayWith]="displayFn">
+                                  <mat-option *ngFor="let option of filteredOperator | async" [value]="option">
+                                    <!--<img [src]="transform('{{option.additional.image}}')"/> {{option.text}}-->
+                                    <img [src]="transform(option.additional.image)" /> {{option.text}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                              <span class="errorMsg" *ngIf="(operator==0 && IsRechargeSubmitted)">Select Operator</span>
+                            </div>
+                          </div>
+                          <!--Auto complete-->
+
+
+                          
 
                           <div class="col-md-12">
                             <div class="form-group  cus-form-check-inline">
-                              <label class="pl-3">Circle</label>
+                              <label>Circle</label>
                               <!--<select2 [data]="CircleData" class="form-control d-none" [value]="circle" (valueChanged)="Circlechanged($event)" dropdownPosition="bottom" [cssImport]=true [options]="CircleOptions"></select2>-->
                               <mat-form-field class="example-full-width">
                                 <input type="text" placeholder="" matInput formControlName="myControlCircle" [matAutocomplete]="auto1">
-                                <a (click)="inputclear(1)" class="Browse-plan">  <i class="fa fa-times"></i> </a><!--[formControl]="myControl"-->
+                                <a (click)="inputclear(1)" class="Browse-plan pr-0">  <i class="fa fa-times"></i> </a><!--[formControl]="myControl"-->
                                 <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="Circlechangednew($event)" [displayWith]="displayFnCircle">
                                   <mat-option *ngFor="let option1 of filteredCircle | async" [value]="option1">
                                     {{option1.text}}
@@ -64,7 +66,7 @@
                           <div class="col-md-12">
                             <div class="form-group form-check-inline cus-form-check-inline">
                               <input type="text" class="form-control cus-form-control" formControlName="amount" [(ngModel)]="amount" [ngClass]="{'is-invalid':(r.amount.errors && IsRechargeSubmitted)||(!amount && r.amount.touched)}" placeholder="Amount">
-                              <a (click)="browseSimplePlan()" class="Browse-plan">  Browse Plans <br>of all operators</a>
+                              <a (click)="browseSimplePlan()" class="Browse-plan" style="line-height: 16px;">  Browse Plans <br><span style="font-size: 10px;">of all operators</span></a>
                             </div>
                           </div>
                           <div class="col-md-12">
@@ -92,7 +94,8 @@
                <img src="{{slide.resourceUrl}}" alt="" width="100%">
          </div>
        </ngx-slick-carousel>
-      </div></div>
+      </div>
+    </div>
                 <div *ngIf="!IsbannerShow" class="form-outter-sec tab-section form-outter-sec-info" >
                    <tabset #staticTabs>
                      

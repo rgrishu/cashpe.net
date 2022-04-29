@@ -56,7 +56,7 @@ font-weight: 600;
 text-transform: capitalize;
 }
 .slide img{
-    height: 485px;
+    height: 400px;
 }
 
 @media (max-width: 479px)

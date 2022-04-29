@@ -142,9 +142,8 @@ float: left;
 }
 
 
-.slide
-img{
-    height: 487px;
+.slide img{
+    height: 400px;
 }
 
 @media (max-width: 479px)

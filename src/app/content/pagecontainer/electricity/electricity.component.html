@@ -61,9 +61,7 @@
                      <div class="slider">
                       <ngx-slick-carousel class="carousel" 
                       #slickModal="slick-carousel" 
-                      [config]="slideConfig" 
-                     
-                      >
+                      [config]="slideConfig">
       <div ngxSlickItem *ngFor="let slide of slides" class="slide">
             <img src="{{ slide.resourceUrl }}" alt="" width="100%">
       </div>
